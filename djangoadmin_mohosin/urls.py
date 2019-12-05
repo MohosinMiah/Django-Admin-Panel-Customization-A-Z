@@ -22,14 +22,14 @@ from django.contrib.auth.models import User, Group
 
 admin.site.site_header = "BD Django Header "
 admin.site.site_title = "BD Admin Portal"
-admin.site.index_title = "Welcome to BD-Admin Panel
+admin.site.index_title = "Welcome to BD-Admin Panel"
 
 
 
 
 # Remove Default App From Admin Panel
-admin.site.unregister(User)
-admin.site.unregister(Group)
+# admin.site.unregister(User)
+# admin.site.unregister(Group)
 
 urlpatterns = [
     path('bdadmin/', include('bdAdmin.urls')),
