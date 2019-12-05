@@ -11,6 +11,11 @@ class Country(models.Model):
     country_history = models.TextField(blank = True)
 
 
+    def __str__(self):
+
+       return self.country_name
+
+
 class Food(models.Model):
 #    Make Plural Food Model Name
     class Meta:

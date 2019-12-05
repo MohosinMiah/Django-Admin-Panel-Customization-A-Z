@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from bdAdmin.admin import bd_another
+
 
 admin.site.site_header = "BD Django Header "
 admin.site.site_title = "BD Admin Portal"
@@ -23,5 +25,6 @@ admin.site.index_title = "Welcome to BD-Admin Panel"
 urlpatterns = [
     path('bdadmin/', include('bdAdmin.urls')),
     path('admin/', admin.site.urls),
-    
+    path('bd_another/', bd_another.urls),
+
 ]
