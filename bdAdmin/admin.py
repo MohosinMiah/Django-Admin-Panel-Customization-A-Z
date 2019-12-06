@@ -23,7 +23,8 @@ bd_another = EventAdminSite(name='bd_another')
 bd_another.register(Country)
 bd_another.register(Food)
 
-MAX_OBJECTS = 1
+# allow creating only one object from the admin
+# MAX_OBJECTS = 1
 
 @admin.register(Country)
 class CountryAdmin(admin.ModelAdmin):
@@ -35,12 +36,19 @@ class CountryAdmin(admin.ModelAdmin):
         ]
         return my_urls + urls
 
-
+# remove the ‘Add’/’Delete’ button for a model
     def has_add_permission(self, request):
-        if self.model.objects.count() >= MAX_OBJECTS:
-            return False
+        return False
 
-        return super().has_add_permission(request)
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+# allow creating only one object from the admin
+    # def has_add_permission(self, request):
+    #     if self.model.objects.count() >= MAX_OBJECTS:
+    #         return False
+
+    #     return super().has_add_permission(request)
         
     def set_country_name(self, request):
         self.model.objects.all().update(country_name="World")
