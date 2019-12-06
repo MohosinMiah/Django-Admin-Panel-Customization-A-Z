@@ -10,10 +10,10 @@ class Country(models.Model):
     country_short_code = models.CharField(max_length=50)
     country_history = models.TextField(blank = True)
 
-
     def __str__(self):
 
        return self.country_name
+
 
 
 class Food(models.Model):
