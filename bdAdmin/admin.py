@@ -23,6 +23,8 @@ bd_another = EventAdminSite(name='bd_another')
 bd_another.register(Country)
 bd_another.register(Food)
 
+MAX_OBJECTS = 1
+
 @admin.register(Country)
 class CountryAdmin(admin.ModelAdmin):
     change_list_template = "bdAdmin/countries_changelist.html"
@@ -33,6 +35,13 @@ class CountryAdmin(admin.ModelAdmin):
         ]
         return my_urls + urls
 
+
+    def has_add_permission(self, request):
+        if self.model.objects.count() >= MAX_OBJECTS:
+            return False
+
+        return super().has_add_permission(request)
+        
     def set_country_name(self, request):
         self.model.objects.all().update(country_name="World")
         self.message_user(request, "Hello World")
