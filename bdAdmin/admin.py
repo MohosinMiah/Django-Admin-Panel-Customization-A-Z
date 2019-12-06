@@ -26,13 +26,17 @@ bd_another.register(Food)
 # allow creating only one object from the admin
 # MAX_OBJECTS = 1
 # admin.site.register(Food)
-class FoodinInline(admin.StackedInline):
-    model = Food
+
+
+@admin.register(Food)
+class FoodAdmin(admin.ModelAdmin):
+    date_hierarchy = 'created_at'
 
 
 
 @admin.register(Country)
 class CountryAdmin(admin.ModelAdmin):
+
     change_list_template = "bdAdmin/countries_changelist.html"
     def get_urls(self):
         urls = super().get_urls()
@@ -41,7 +45,8 @@ class CountryAdmin(admin.ModelAdmin):
         ]
         return my_urls + urls
 
-    inlines = [FoodinInline]
+
+    # inlines = [FoodinInline]
 
 
 # remove the ‘Add’/’Delete’ button for a model
