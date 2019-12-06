@@ -25,6 +25,11 @@ bd_another.register(Food)
 
 # allow creating only one object from the admin
 # MAX_OBJECTS = 1
+# admin.site.register(Food)
+class FoodinInline(admin.StackedInline):
+    model = Food
+
+
 
 @admin.register(Country)
 class CountryAdmin(admin.ModelAdmin):
@@ -36,12 +41,15 @@ class CountryAdmin(admin.ModelAdmin):
         ]
         return my_urls + urls
 
-# remove the ‘Add’/’Delete’ button for a model
-    def has_add_permission(self, request):
-        return False
+    inlines = [FoodinInline]
 
-    def has_delete_permission(self, request, obj=None):
-        return False
+
+# remove the ‘Add’/’Delete’ button for a model
+    # def has_add_permission(self, request):
+    #     return False
+
+    # def has_delete_permission(self, request, obj=None):
+    #     return False
 
 # allow creating only one object from the admin
     # def has_add_permission(self, request):
@@ -58,5 +66,5 @@ class CountryAdmin(admin.ModelAdmin):
 
 # admin.site.register(Country)
 
-admin.site.register(Food)
+
 
